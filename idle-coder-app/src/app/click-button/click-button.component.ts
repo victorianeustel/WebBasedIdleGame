@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-click-button',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClickButtonComponent implements OnInit {
 
-  constructor() { }
+  constructor(public accSer : AccountService) { }
 
   ngOnInit(): void {
   }
-
+  
 }
