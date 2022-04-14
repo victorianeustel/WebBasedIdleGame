@@ -1,5 +1,17 @@
-button{
-    height: 200px;
-    width: 400px;
-    font-size: 75px;
+#button{
+    height: 400px;
+    width: auto;
+    padding: 12px 40px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+#button:active {
+    transform: scale(1);
+}
+
+#button:hover:not(:active){
+    transform: scale(1.02) ;
 }
