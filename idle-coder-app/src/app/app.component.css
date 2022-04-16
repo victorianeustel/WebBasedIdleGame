@@ -1,3 +1,20 @@
-.container{
+.container {
+    display:flex;
+}
+
+.right-side-menu{
+    flex-grow: 1; 
+    max-width: 30%;
+}
+
+.left-side-menu {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.game {
+    flex-grow: 3;
     text-align: center;
+    justify-content: center;
+    align-content: center;
 }

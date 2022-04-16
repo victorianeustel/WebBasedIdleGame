@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -13,6 +15,8 @@ import { StoreComponent } from './store/store.component';
 import { InventoryComponent } from './inventory/inventory.component';
 
 import { AccountService } from './account.service';
+
+
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import { AccountService } from './account.service';
     InventoryComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatExpansionModule,
   ],
   providers: [AccountService],
   bootstrap: [AppComponent]

@@ -1,0 +1,22 @@
+.mat-accordion .mat-expansion-panel, .mat-expansion-panel-header{
+  margin-bottom: 1px;
+  margin-top: 1px;
+  border-radius: 0px;
+}
+
+.mat-expansion-panel-header:hover {
+  background-color: red;
+  color: red;
+}
+
+mat-panel-title {
+  font-weight: bold;
+  font-size:x-large;
+}
+
+mat-expansion-panel-header {
+  box-shadow: 1px;
+  margin: 1px;
+  border: 1px;
+  padding: 15px;
+}
