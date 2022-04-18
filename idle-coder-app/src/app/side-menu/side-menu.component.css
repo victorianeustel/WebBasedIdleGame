@@ -1,17 +1,19 @@
+.mat-accordion{
+  margin: 10px;
+}
+
 .mat-accordion .mat-expansion-panel, .mat-expansion-panel-header{
   margin-bottom: 1px;
   margin-top: 1px;
-  border-radius: 0px;
-}
-
-.mat-expansion-panel-header:hover {
-  background-color: red;
-  color: red;
+  color: rgb(71, 58, 37);
+  background-color: rgb(237, 247, 247);;
+  border-radius: 5px;
 }
 
 mat-panel-title {
   font-weight: bold;
   font-size:x-large;
+  color: rgb(71, 58, 37);
 }
 
 mat-expansion-panel-header {

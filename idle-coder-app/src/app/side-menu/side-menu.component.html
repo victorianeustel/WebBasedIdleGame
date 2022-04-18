@@ -1,11 +1,16 @@
 <mat-accordion>
+  <!-- Instruction panel -->
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title> Instructions </mat-panel-title>
     </mat-expansion-panel-header>
-    <app-instructions></app-instructions>
+    <div>
+      <app-instructions ></app-instructions>
+    </div>
+    
   </mat-expansion-panel>
 
+  <!-- Store panel -->
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title> Store </mat-panel-title>
@@ -13,13 +18,15 @@
     <app-store></app-store>
   </mat-expansion-panel>
 
+  <!-- High Scores panel -->
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title> High Scores </mat-panel-title>
     </mat-expansion-panel-header>
-    <app-score></app-score>
+    <app-high-scores></app-high-scores>
   </mat-expansion-panel>
 
+  <!-- Information Panel -->
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title> Information </mat-panel-title>

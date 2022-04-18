@@ -15,6 +15,7 @@ import { StoreComponent } from './store/store.component';
 import { InventoryComponent } from './inventory/inventory.component';
 
 import { AccountService } from './account.service';
+import { HighScoresComponent } from './high-scores/high-scores.component';
 
 
 
@@ -29,7 +30,8 @@ import { AccountService } from './account.service';
     SettingsMenuComponent,
     ItemComponent,
     StoreComponent,
-    InventoryComponent
+    InventoryComponent,
+    HighScoresComponent
   ],
   imports: [
     BrowserModule,
