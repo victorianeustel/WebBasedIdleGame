@@ -18,3 +18,9 @@
     justify-content: center;
     align-content: center;
 }
+
+.title-image{
+    margin-top: 20px;
+    width: 450px;
+    height: auto;
+}
