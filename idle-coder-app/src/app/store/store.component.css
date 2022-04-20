@@ -1,0 +1,13 @@
+.card{
+    margin: 10px;
+}
+
+.container{
+    background-color: rgb(152, 208, 212);
+    background-blend-mode: lighten;
+    color: rgb(17, 68, 74);
+}
+
+.button{
+    background-color: rgb(37,158,166);
+}

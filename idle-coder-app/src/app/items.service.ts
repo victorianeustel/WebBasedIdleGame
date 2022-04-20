@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { item } from 'src/item';
 import { AccountService } from './account.service';
 
@@ -6,14 +7,18 @@ import { AccountService } from './account.service';
   providedIn: 'root'
 })
 export class ItemsService {
+  http: any;
+  static itemsArray: item[];
 
   constructor(public acctSer: AccountService) { }
 
     //Default items instantiated
     itemsArray: item[] = [
-      {name:"Typing Lessons", desc:"Clicks Worth 1 More!", price:50, isIncrementModifier:true, increaseToStat:1, isPurchased:false},
-      {name:"New Keyboard", desc:"Clicks Worth 2 More!", price:150, isIncrementModifier:true, increaseToStat:1, isPurchased:false},
-      {name:"New Computer", desc:"Clicks Worth 100 More!", price:5000, isIncrementModifier:true, increaseToStat:100, isPurchased:false}
+      {name:"Typing Lessons", desc:"Clicks are worth 1 more!", price:50, isIncrementModifier:true, increaseToStat:1, isPurchased:false},
+      {name:"New Keyboard", desc:"Clicks are worth 5 more!", price:150, isIncrementModifier:true, increaseToStat:5, isPurchased:false},
+      {name:"New Computer", desc:"Clicks are worth 200 more!", price:5000, isIncrementModifier:true, increaseToStat:200, isPurchased:false},
+      {name:"Hire Developer", desc:"Clicks are worth 500 more!", price:10000, isIncrementModifier:true, increaseToStat:500, isPurchased:false},
+
     ];
 
     //purchasing currently does nothing if you do not have enough points to purchase

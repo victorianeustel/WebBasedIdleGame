@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { AppComponent } from './app.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -31,12 +34,15 @@ import { HighScoresComponent } from './high-scores/high-scores.component';
     ItemComponent,
     StoreComponent,
     InventoryComponent,
-    HighScoresComponent
+    HighScoresComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatExpansionModule,
+    MatButtonModule,
+    MatCardModule,
+    ScrollingModule,
   ],
   providers: [AccountService],
   bootstrap: [AppComponent]
