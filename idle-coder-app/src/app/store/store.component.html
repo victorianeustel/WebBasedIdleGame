@@ -1,12 +1,12 @@
 <mat-card class="container">
     <h2>Available Points: {{acctServ.score}}</h2>
     <h3>Current Worth of Clicks: {{acctServ.multiplier}}</h3>
-    <mat-card class="card" *ngFor="let item of items; let i = index">
-        <mat-card-title>{{item.name}}</mat-card-title>
-        <mat-card-subtitle>{{item.desc}}</mat-card-subtitle>
-        <mat-card-content>Price: {{item.price}} points</mat-card-content>
+    <div *ngFor="let item of items; let i = index">
+    <mat-card class="card" *ngIf="item.numPurchased < item.purchaseLimit">
+        <app-item [index]="i"></app-item>
         <button mat-raised-button color="primary" (click)="itmServ.purchase(i)" [disabled]="item.price > acctServ.score">
             Buy Item
         </button>
     </mat-card>
+    </div>
 </mat-card>

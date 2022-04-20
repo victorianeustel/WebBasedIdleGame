@@ -10,5 +10,7 @@ export interface item{
     //increaseToStat: value added once purchased
     increaseToStat: number;
     //isPurchased: defaults to false, once purchased changes to true
-    isPurchased: boolean;
+    numPurchased: number;
+    //purchaseLimit: the maximum amount of times an item can be purchased
+    purchaseLimit: number;
 }

@@ -14,10 +14,10 @@ export class ItemsService {
 
     //Default items instantiated
     itemsArray: item[] = [
-      {name:"Typing Lessons", desc:"Clicks are worth 1 more!", price:50, isIncrementModifier:true, increaseToStat:1, isPurchased:false},
-      {name:"New Keyboard", desc:"Clicks are worth 5 more!", price:150, isIncrementModifier:true, increaseToStat:5, isPurchased:false},
-      {name:"New Computer", desc:"Clicks are worth 200 more!", price:5000, isIncrementModifier:true, increaseToStat:200, isPurchased:false},
-      {name:"Hire Developer", desc:"Clicks are worth 500 more!", price:10000, isIncrementModifier:true, increaseToStat:500, isPurchased:false},
+      {name:"Typing Lessons", desc:"Clicks are worth 1 more!", price:50, isIncrementModifier:true, increaseToStat:1, numPurchased:0, purchaseLimit:50},
+      {name:"New Keyboard", desc:"Clicks are worth 5 more!", price:150, isIncrementModifier:true, increaseToStat:5, numPurchased:0, purchaseLimit:50},
+      {name:"New Computer", desc:"Clicks are worth 200 more!", price:5000, isIncrementModifier:true, increaseToStat:200, numPurchased:0, purchaseLimit:50},
+      {name:"Hire Developer", desc:"Clicks are worth 500 more!", price:10000, isIncrementModifier:true, increaseToStat:500, numPurchased:0, purchaseLimit:50},
 
     ];
 
@@ -25,10 +25,17 @@ export class ItemsService {
     purchase(index: number){
       //if enough points to purchase given item
       if(this.acctSer.score >= this.itemsArray[index].price){
-        //set the item to the purchased status
-        this.itemsArray[index].isPurchased = true;
+        //increase the purchase counter
+        this.itemsArray[index].numPurchased += 1;
         //take the points away from the user according to the cost
         this.acctSer.score -= this.itemsArray[index].price;
+
+        /*START: POTENTIAL INCLUSION --- SCALING COSTS ---
+        
+        this.itemsArray[index].price += Math.round(this.itemsArray[index].price * this.itemsArray[index].numPurchased * .01); 
+
+        END: --- SCALING COSTS ---*/
+
         //if item increases the button multiplier, add increase to current multiplier
         //else add increase to current score per minute
         if(this.itemsArray[index].isIncrementModifier)
