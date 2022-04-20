@@ -3,7 +3,9 @@
     <h3>Current Worth of Clicks: {{acctServ.multiplier}}</h3>
     <div *ngFor="let item of items; let i = index">
     <mat-card class="card" *ngIf="item.numPurchased < item.purchaseLimit">
-        <app-item [index]="i"></app-item>
+        <mat-card-title>{{item.name}}</mat-card-title>
+        <mat-card-subtitle>{{item.desc}}</mat-card-subtitle>
+        <mat-card-content>Price: {{item.price}} points</mat-card-content>
         <button mat-raised-button color="primary" (click)="itmServ.purchase(i)" [disabled]="item.price > acctServ.score">
             Buy Item
         </button>
