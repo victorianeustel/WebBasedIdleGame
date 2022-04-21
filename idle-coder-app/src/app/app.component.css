@@ -1,5 +1,6 @@
 .container {
     display:flex;
+    justify-content: space-between;
 }
 
 .right-side-menu{
@@ -11,6 +12,16 @@
     flex-grow: 1;
     text-align: left;
 }
+
+.left-side-buttons {
+    height: 40%;
+}
+
+.left-side-inventory {
+    height: 60%;
+}
+
+
 
 .game {
     flex-grow: 3;
