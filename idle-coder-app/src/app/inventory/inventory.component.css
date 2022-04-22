@@ -7,10 +7,21 @@
     background-blend-mode: lighten;
     color: rgb(17, 68, 74);
     margin: 5px;
+    border: 1px;
+    border-color: rgb(41, 131, 141);
+    border-style: solid;
 }
 
 mat-card-title {
     padding: 6px;
     font-weight: bold;
     font-size: x-large;
+}
+
+mat-divider {
+    background-color: rgb(41, 131, 141);
+}
+
+.divider {
+    padding-bottom: 10px;
 }

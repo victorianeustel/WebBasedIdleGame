@@ -2,6 +2,9 @@
     <mat-card-title-group>
       <mat-card-title>Inventory Items</mat-card-title>
     </mat-card-title-group>
+    <div class="divider">
+        <mat-divider [inset]="true"></mat-divider>
+    </div>
     <mat-card-content>
         <div class="card" *ngFor="let item of items; let i = index">
             <app-item [index]="i"></app-item>

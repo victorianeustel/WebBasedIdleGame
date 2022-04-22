@@ -19,6 +19,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 
 import { AccountService } from './account.service';
 import { HighScoresComponent } from './high-scores/high-scores.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 
@@ -43,6 +44,7 @@ import { HighScoresComponent } from './high-scores/high-scores.component';
     MatButtonModule,
     MatCardModule,
     ScrollingModule,
+    MatDividerModule
   ],
   providers: [AccountService],
   bootstrap: [AppComponent]
