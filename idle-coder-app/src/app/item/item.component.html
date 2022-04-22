@@ -1,5 +1,7 @@
 <mat-card class="card">
     <mat-card-title>{{itmServ.itemsArray[index].name}}</mat-card-title>
     <mat-card-subtitle>{{itmServ.itemsArray[index].desc}}</mat-card-subtitle>
-    <mat-card-content>Price: {{itmServ.itemsArray[index].price}} points <br>Owned: {{itmServ.itemsArray[index].numPurchased}} <br>Limit: {{itmServ.itemsArray[index].purchaseLimit}}</mat-card-content>
+    <mat-card-content>
+        Price: {{itmServ.itemsArray[index].price}} points <br>
+        Owned: {{itmServ.itemsArray[index].numPurchased}} out of {{itmServ.itemsArray[index].purchaseLimit}}</mat-card-content>
 </mat-card>

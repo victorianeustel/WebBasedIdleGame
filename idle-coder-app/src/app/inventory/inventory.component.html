@@ -1,1 +1,10 @@
-<p>inventory works!</p>
+<mat-card class="container">
+    <mat-card-title-group>
+      <mat-card-title>Inventory Items</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+        <div class="card" *ngFor="let item of items; let i = index">
+            <app-item [index]="i"></app-item>
+        </div>
+    </mat-card-content>
+</mat-card>

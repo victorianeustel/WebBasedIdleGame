@@ -1,0 +1,16 @@
+.card {
+    padding: 6px;
+}
+
+.container{
+    background-color: rgb(152, 208, 212);
+    background-blend-mode: lighten;
+    color: rgb(17, 68, 74);
+    margin: 5px;
+}
+
+mat-card-title {
+    padding: 6px;
+    font-weight: bold;
+    font-size: x-large;
+}

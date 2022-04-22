@@ -11,3 +11,7 @@
 .button{
     background-color: rgb(37,158,166);
 }
+
+mat-card-title {
+    font-size: large;
+}

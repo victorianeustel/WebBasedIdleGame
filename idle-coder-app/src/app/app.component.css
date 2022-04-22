@@ -4,8 +4,8 @@
 }
 
 .right-side-menu{
-    flex-grow: 1; 
-    max-width: 30%;
+    flex-grow: 2; 
+    max-width: 25%;
 }
 
 .left-side-menu {
@@ -14,17 +14,11 @@
 }
 
 .left-side-buttons {
-    height: 40%;
+    height: 20vh;
 }
-
-.left-side-inventory {
-    height: 60%;
-}
-
-
 
 .game {
-    flex-grow: 3;
+    flex-grow: 12;
     text-align: center;
     justify-content: center;
     align-content: center;
