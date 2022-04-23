@@ -5,6 +5,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -46,7 +47,7 @@ import { MatDividerModule } from '@angular/material/divider';
     ScrollingModule,
     MatDividerModule
   ],
-  providers: [AccountService],
+  providers: [AccountService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,25 @@
+button{
+    width: 200px;
+    height: auto;
+    font-size: xx-large;
+    text-align: center;
+    font-weight: bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.container{
+    background-color: rgb(152, 208, 212);
+    background-blend-mode: lighten;
+    color: rgb(17, 68, 74);
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-right: 5px;
+    margin-left: 5px;
+    border: 1px;
+    border-color: rgb(41, 131, 141);
+    border-style: solid;
+}
+
+.mat-card-content{
+    margin-bottom: 8px;
+}
