@@ -1,10 +1,12 @@
 button{
     width: 200px;
-    height: auto;
-    font-size: xx-large;
+    height: fit-content; 
+    font-size: large;
+    background-color: rgb(17, 68, 74) !important;
     text-align: center;
     font-weight: bold;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-style: italic;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container{
@@ -21,5 +23,5 @@ button{
 }
 
 .mat-card-content{
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }

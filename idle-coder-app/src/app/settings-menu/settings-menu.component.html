@@ -1,11 +1,14 @@
 <mat-card class="container">
+    <h2>Account Settings</h2>
     <mat-card-content>
-        <button (click)="new()">New</button>
+        <button mat-raised-button color="accent" (click)="new()">New</button>
     </mat-card-content>
     <mat-card-content>
-        <button (click)="load()">Load</button>
+        <input type="id" #id>
+        <button mat-raised-button color="accent" (click)="load(id.value)">Load</button>
     </mat-card-content>
     <mat-card-content>
-        <button (click)="save()">Save</button>
+        <input type="newID" #newID>
+        <button mat-raised-button color="accent" (click)="save(newID.value)">Save</button>
     </mat-card-content>
 </mat-card>
