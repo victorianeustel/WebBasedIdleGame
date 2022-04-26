@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Account } from './account';
 import { ItemsService } from './items.service';
-import { findIndex, map } from 'rxjs';
+import { findIndex, map, timer } from 'rxjs';
 import { item } from 'src/item';
 
 //GLOBALLY ACCESSABLE
@@ -24,6 +24,20 @@ export class AccountService {
   //User's current Score per Minute; defaults to 0
   perMinute: number = 0;
 
+  //Boolean for auto-save enabled/disabled
+  autosaveOn: boolean = false;
+
+  //Timer Initialization, emits values every second
+  source = timer(0,1000);
+  subscribe = this.source.subscribe(val =>{
+    //Increase score
+    this.score += Math.round(this.perMinute/60);
+    //Call autosave function every 60 seconds
+    if(val % 60 == 0 && this.autosaveOn){
+      //AUTOSAVE CODE HERE
+    }
+  });
+
   //This method should be called whenever the button is clicked
   incrementScore() {
     this.score += this.multiplier;
@@ -42,7 +56,8 @@ export class AccountService {
   acct: Account = {
     id : '',
     score: 0,
-    multiplier: 0,
+    multiplier: 1,
+    perMinute: 0,
     itemInventory: [],
   }
 

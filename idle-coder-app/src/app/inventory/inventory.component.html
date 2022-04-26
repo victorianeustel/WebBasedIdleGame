@@ -6,8 +6,10 @@
         <mat-divider [inset]="true"></mat-divider>
     </div>
     <mat-card-content>
-        <div class="card" *ngFor="let item of items; let i = index">
-            <app-item [index]="i"></app-item>
+        <div *ngFor="let item of items; let i = index">
+            <div class="card" *ngIf="items[i].numPurchased>0">
+                <app-item [index]="i"></app-item>
+            </div>
         </div>
     </mat-card-content>
 </mat-card>

@@ -1,6 +1,6 @@
 <mat-card class="container">
     <h2>Available Points: {{acctServ.score}}</h2>
-    <h3>Current Worth of Clicks: {{acctServ.multiplier}}</h3>
+    <h3>Current Worth of Clicks: {{acctServ.multiplier}}<br>Current Score per Minute: {{acctServ.perMinute}}</h3>
     <div *ngFor="let item of items; let i = index">
     <mat-card class="card" *ngIf="item.numPurchased < item.purchaseLimit">
         <mat-card-title>{{item.name}}</mat-card-title>

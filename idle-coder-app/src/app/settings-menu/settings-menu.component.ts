@@ -54,7 +54,8 @@ export class SettingsMenuComponent implements OnInit {
     const newAcct: Account = {
       id: id,
       score: this.acctServ.score,    
-      multiplier: this.acctServ.multiplier,    
+      multiplier: this.acctServ.multiplier,
+      perMinute: this.acctServ.perMinute,    
       itemInventory: this.itmServ.itemsArray,
     };
     

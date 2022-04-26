@@ -15,10 +15,12 @@ export class ItemsService {
     //Default items instantiated
     itemsArray: item[] = [
       {name:"Typing Lessons", desc:"Clicks are worth 1 more!", price:50, isIncrementModifier:true, increaseToStat:1, numPurchased:0, purchaseLimit:50},
+      {name:"Mouse on a Wheel", desc:"+60 Score per Minute!", price: 50, isIncrementModifier:false, increaseToStat:60, numPurchased:0, purchaseLimit:50},
       {name:"New Keyboard", desc:"Clicks are worth 5 more!", price:150, isIncrementModifier:true, increaseToStat:5, numPurchased:0, purchaseLimit:50},
+      {name:"Hamsters on Wheels", desc:"+300 Score per Minute!", price: 200, isIncrementModifier:false, increaseToStat:300, numPurchased:0, purchaseLimit:50},
       {name:"New Computer", desc:"Clicks are worth 200 more!", price:5000, isIncrementModifier:true, increaseToStat:200, numPurchased:0, purchaseLimit:50},
-      {name:"Hire Developer", desc:"Clicks are worth 500 more!", price:10000, isIncrementModifier:true, increaseToStat:500, numPurchased:0, purchaseLimit:50},
-
+      {name:"Hire a Developer", desc:"+5000 Score per Minute!", price: 7500, isIncrementModifier:false, increaseToStat:1000, numPurchased:0, purchaseLimit:50},
+      {name:"Coffee", desc:"Clicks are worth 500 more!", price:10000, isIncrementModifier:true, increaseToStat:500, numPurchased:0, purchaseLimit:50},
     ];
 
     //purchasing currently does nothing if you do not have enough points to purchase
