@@ -12,7 +12,7 @@ import { ItemsService } from '../items.service';
 })
 export class SettingsMenuComponent implements OnInit {
 
-  constructor(private cookieService: CookieService, private acctServ: AccountService, private itmServ: ItemsService) {}
+  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -36,8 +36,10 @@ export class SettingsMenuComponent implements OnInit {
     this.index = this.accountList.map(account => account.id).indexOf(username);
 
     //set current settings to account loaded settings
+    this.acctServ.id = this.acctServ.idList[this.index];
     this.acctServ.score = this.accountList[this.index].score;
     this.acctServ.multiplier = this.accountList[this.index].multiplier;
+    this.acctServ.perMinute = this.accountList[this.index].perMinute;
     this.itmServ.itemsArray = this.accountList[this.index].itemInventory;
 
     try{
@@ -48,11 +50,11 @@ export class SettingsMenuComponent implements OnInit {
   }
 
   //This method could be called by the autoSave method
-  save(id: string){
+  save(){
     //Get save hash from save function and set SaveHash equal to it
     // this.cookieService.set('SaveHash', this.SaveHash);
     const newAcct: Account = {
-      id: id,
+      id: this.acctServ.createID(),
       score: this.acctServ.score,    
       multiplier: this.acctServ.multiplier,
       perMinute: this.acctServ.perMinute,    

@@ -4,11 +4,11 @@
     <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="store-viewport">
         <h5>Scroll to see more items.</h5>
         <div *cdkVirtualFor="let item of items; let i = index" class="store-item">
-            <mat-card class="card" *ngIf="item.numPurchased < item.purchaseLimit">
+            <mat-card class="card">
                 <mat-card-title>{{item.name}}</mat-card-title>
                 <mat-card-subtitle>{{item.desc}}</mat-card-subtitle>
                 <mat-card-content>Price: {{item.price}} points</mat-card-content>
-                <button class = "buybutton" mat-raised-button color="accent" (click)="itmServ.purchase(i)" [disabled]="item.price > acctServ.score">
+                <button class = "buybutton" mat-raised-button color="accent" (click)="itmServ.purchase(i)" [disabled]="item.price > acctServ.score || item.numPurchased>item.purchaseLimit" >
                     Buy Item
                 </button>
             </mat-card>        

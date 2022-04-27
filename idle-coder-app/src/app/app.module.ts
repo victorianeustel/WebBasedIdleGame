@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { CookieService } from 'ngx-cookie-service';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 import { AppComponent } from './app.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -47,7 +48,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatCardModule,
     ScrollingModule,
     MatDividerModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AccountService, CookieService],
   bootstrap: [AppComponent]

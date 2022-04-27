@@ -4,6 +4,8 @@ import { Account } from './account';
 import { ItemsService } from './items.service';
 import { findIndex, map, timer } from 'rxjs';
 import { item } from 'src/item';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { highScore } from './highScore';
 
 //GLOBALLY ACCESSABLE
 
@@ -13,7 +15,10 @@ import { item } from 'src/item';
 
 export class AccountService {
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient) { }
+
+  //user's id
+  id: string = '';
 
   //User's current score; defaults to 0
   score: number = 0;
@@ -54,14 +59,18 @@ export class AccountService {
   }
 
   acct: Account = {
-    id : '',
-    score: 0,
-    multiplier: 1,
-    perMinute: 0,
-    itemInventory: [],
+    id : this.createID(),
+    score: this.score,
+    multiplier: this.multiplier,
+    perMinute: this.perMinute,
+    itemInventory: ItemsService.itemsArray,
   }
 
+  highScoresList: highScore[] = []
+
   accountList: Account[] = [];
+
+  idList: string[] = [];
 
   index: number = 0;
 
@@ -84,15 +93,46 @@ export class AccountService {
       .pipe(
         map((responseData) => {
           const accountList: Account[] = [];
-          for (const key in responseData) accountList.push(responseData[key]);
+          this.idList = [];
+          for (const key in responseData)
+           accountList.push(responseData[key]);
+          for (const key in responseData)
+            this.idList.push(key);
 
+          // console.log(key in responseData);
           return accountList;
         })
       );
   }
 
-  updateAccount(acct: Account){
-
+  createID(){
+      var uniqueID = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+      for (var i = 0; i < 20; i++)
+        uniqueID += possible.charAt(Math.floor(Math.random() * possible.length));
+    
+      return uniqueID;
   }
 
+  addHighScore(highScore: highScore) {
+    return this.http.post(
+      'https://idle-coder-app-default-rtdb.firebaseio.com/'+ 'highscores.json',
+      highScore
+    );
+  }
+
+  getHighScores(){
+    return this.http
+    .get<highScore[]>
+      ('https://idle-coder-app-default-rtdb.firebaseio.com/' + 'highscores.json')
+      .pipe(
+        map((responseData) => {
+          for (const key in responseData)
+           this.highScoresList.push(responseData[key]);
+          
+           return this.highScoresList;
+        })
+      );
+  }
 }
