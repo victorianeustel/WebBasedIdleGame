@@ -123,6 +123,7 @@ export class AccountService {
   }
 
   getHighScores(){
+    this.highScoresList = [];
     return this.http
     .get<highScore[]>
       ('https://idle-coder-app-default-rtdb.firebaseio.com/' + 'highscores.json')

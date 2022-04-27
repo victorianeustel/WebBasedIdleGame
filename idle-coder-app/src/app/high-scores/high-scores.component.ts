@@ -11,7 +11,10 @@ export class HighScoresComponent implements OnInit {
 
   constructor(private acctServ: AccountService) { }
 
+  scores: highScore[] = [];
+
   ngOnInit(): void {
+    this.fetchData();
   }
 
   scoreRecord: highScore = {
@@ -24,5 +27,14 @@ export class HighScoresComponent implements OnInit {
     this.acctServ.addHighScore(this.scoreRecord).subscribe((data) => {
     console.log(data);
   });
+    this.fetchData();
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.scores=[];
+    this.acctServ.getHighScores().subscribe((data) => {
+      this.scores = data;
+    });
   }
 }
