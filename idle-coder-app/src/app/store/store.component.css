@@ -8,10 +8,36 @@
     color: rgb(17, 68, 74);
 }
 
-.button{
-    background-color: rgb(37,158,166);
+.buybutton{
+    background-color: rgb(84, 169, 174);
+    color: white;
 }
 
-mat-card-title {
+.mat-card-title {
     font-size: large;
+    margin: 3px;
 }
+
+.mat-card-content, .mat-card-subtitle{
+    margin: 2px;
+    padding: 1px;
+}
+
+.store-viewport {
+    height: 250px;
+    width: auto;
+    padding: 20px;
+  }
+  
+  .store-item {
+    height: 140px;
+  }
+
+  h3{
+      margin: 0px;
+      padding: 0px;
+  }
+
+  #score-title{
+      font-weight: bold;
+  }

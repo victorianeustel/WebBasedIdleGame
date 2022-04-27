@@ -1,14 +1,17 @@
 <mat-card class="container">
-    <h2>Available Points: {{acctServ.score}}</h2>
-    <h3>Current Worth of Clicks: {{acctServ.multiplier}}<br>Current Score per Minute: {{acctServ.perMinute}}</h3>
-    <div *ngFor="let item of items; let i = index">
-    <mat-card class="card" *ngIf="item.numPurchased < item.purchaseLimit">
-        <mat-card-title>{{item.name}}</mat-card-title>
-        <mat-card-subtitle>{{item.desc}}</mat-card-subtitle>
-        <mat-card-content>Price: {{item.price}} points</mat-card-content>
-        <button mat-raised-button color="primary" (click)="itmServ.purchase(i)" [disabled]="item.price > acctServ.score">
-            Buy Item
-        </button>
-    </mat-card>
-    </div>
+    <h3 id="score-title">Available Points: {{acctServ.score}}</h3>
+    <h4>Current Worth of Clicks: {{acctServ.multiplier}}<br>Current Score per Minute: {{acctServ.perMinute}}</h4>
+    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="store-viewport">
+        <h5>Scroll to see more items.</h5>
+        <div *cdkVirtualFor="let item of items; let i = index" class="store-item">
+            <mat-card class="card" *ngIf="item.numPurchased < item.purchaseLimit">
+                <mat-card-title>{{item.name}}</mat-card-title>
+                <mat-card-subtitle>{{item.desc}}</mat-card-subtitle>
+                <mat-card-content>Price: {{item.price}} points</mat-card-content>
+                <button class = "buybutton" mat-raised-button color="accent" (click)="itmServ.purchase(i)" [disabled]="item.price > acctServ.score">
+                    Buy Item
+                </button>
+            </mat-card>        
+        </div>
+    </cdk-virtual-scroll-viewport>
 </mat-card>

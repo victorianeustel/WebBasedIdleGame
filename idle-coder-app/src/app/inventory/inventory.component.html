@@ -6,10 +6,14 @@
         <mat-divider [inset]="true"></mat-divider>
     </div>
     <mat-card-content>
-        <div *ngFor="let item of items; let i = index">
-            <div class="card" *ngIf="items[i].numPurchased>0">
+        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="inventory-viewport">
+        <!-- <div *ngFor="let item of items; let i = index">
+            <div class="card" *ngIf="items[i].numPurchased>0"> -->
+            <div *cdkVirtualFor="let item of items; let i = index;" class="inventory-item">
                 <app-item [index]="i"></app-item>
             </div>
-        </div>
+        <!-- </div> -->
+        </cdk-virtual-scroll-viewport>
+        <!-- </div> -->
     </mat-card-content>
 </mat-card>

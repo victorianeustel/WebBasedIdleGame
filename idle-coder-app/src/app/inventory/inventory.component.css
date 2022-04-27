@@ -25,3 +25,13 @@ mat-divider {
 .divider {
     padding-bottom: 10px;
 }
+
+.inventory-viewport {
+    height: 360px;
+    width: auto;
+    padding: 20px;
+}
+  
+  .inventory-item {
+    height: 140px;
+  }
