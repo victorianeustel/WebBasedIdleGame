@@ -15,7 +15,7 @@ import { highScore } from './highScore';
 
 export class AccountService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,) { }
 
   //user's id
   id: string = '';
@@ -135,5 +135,29 @@ export class AccountService {
            return this.highScoresList;
         })
       );
+  }
+
+  updateSaveFile(items: item[]){
+    this.http.patch("https://idle-coder-app-default-rtdb.firebaseio.com/accounts/" + this.id + ".json",
+    {
+        "id": this.id,
+        "itemInventory": items,
+        "multiplier": this.multiplier,
+        "perMinute": this.perMinute,
+        "score": this.score,
+    }
+    )
+    .subscribe(
+        val => {
+            console.log("PUT call successful value returned in body", 
+                        val);
+        },
+        response => {
+            console.log("PUT call in error", response);
+        },
+        () => {
+            console.log("The PUT observable is now completed.");
+        }
+    );
   }
 }

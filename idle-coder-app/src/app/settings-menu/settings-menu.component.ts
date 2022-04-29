@@ -4,6 +4,7 @@ import { findIndex } from 'rxjs';
 import { Account } from '../account';
 import { AccountService } from '../account.service';
 import { ItemsService } from '../items.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-settings-menu',
@@ -53,18 +54,25 @@ export class SettingsMenuComponent implements OnInit {
   save(){
     //Get save hash from save function and set SaveHash equal to it
     // this.cookieService.set('SaveHash', this.SaveHash);
-    const newAcct: Account = {
-      id: this.acctServ.createID(),
-      score: this.acctServ.score,    
-      multiplier: this.acctServ.multiplier,
-      perMinute: this.acctServ.perMinute,    
-      itemInventory: this.itmServ.itemsArray,
-    };
-    
-    this.acctServ.addAccount(newAcct).subscribe((data) => {
-      console.log(data);
-    });
 
+    if(this.acctServ.id !=  '') {
+      this.updateAccount();
+    }
+    else{
+      const newAcct: Account = {
+        id: this.acctServ.createID(),
+        score: this.acctServ.score,    
+        multiplier: this.acctServ.multiplier,
+        perMinute: this.acctServ.perMinute,    
+        itemInventory: this.itmServ.itemsArray,
+      };
+
+      this.acctServ.id = newAcct.id;
+    
+      this.acctServ.addAccount(newAcct).subscribe((data) => {
+        console.log(data);
+      });
+    }
     this.fetchData();
   }
 
@@ -72,5 +80,10 @@ export class SettingsMenuComponent implements OnInit {
     this.acctServ.getAccounts().subscribe((data) => {
       this.accountList = data;
     });
+  }
+
+  updateAccount(){
+    this.acctServ.updateSaveFile(this.itmServ.itemsArray);
+    this.fetchData();
   }
 }
