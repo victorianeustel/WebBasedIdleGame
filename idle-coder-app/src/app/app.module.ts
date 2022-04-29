@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {SettingsMenuComponent} from './settings-menu/settings-menu.component';
 
 import { AccountService } from './account.service';
+import { ItemsService } from './items.service'
 import { HighScoresComponent } from './high-scores/high-scores.component';
 import { MatDividerModule } from '@angular/material/divider';
 
@@ -50,7 +51,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDividerModule,
     HttpClientModule,
   ],
-  providers: [AccountService, CookieService],
+  providers: [AccountService, ItemsService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

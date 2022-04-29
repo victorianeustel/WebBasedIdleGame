@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ComponentFactoryResolver, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Account } from './account';
 import { ItemsService } from './items.service';
@@ -15,10 +15,10 @@ import { highScore } from './highScore';
 
 export class AccountService {
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient) { }
 
   //user's id
-  id: string = '';
+  id: string = this.createID();
 
   //User's current score; defaults to 0
   score: number = 0;
@@ -29,18 +29,11 @@ export class AccountService {
   //User's current Score per Minute; defaults to 0
   perMinute: number = 0;
 
-  //Boolean for auto-save enabled/disabled
-  autosaveOn: boolean = false;
-
   //Timer Initialization, emits values every second
   source = timer(0,1000);
   subscribe = this.source.subscribe(val =>{
     //Increase score
     this.score += Math.round(this.perMinute/60);
-    //Call autosave function every 60 seconds
-    if(val % 60 == 0 && this.autosaveOn){
-      //AUTOSAVE CODE HERE
-    }
   });
 
   //This method should be called whenever the button is clicked

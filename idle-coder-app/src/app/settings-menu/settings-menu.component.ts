@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { findIndex } from 'rxjs';
+import { findIndex, timer } from 'rxjs';
 import { Account } from '../account';
 import { AccountService } from '../account.service';
 import { ItemsService } from '../items.service';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 @Component({
   selector: 'app-settings-menu',
@@ -18,6 +19,8 @@ export class SettingsMenuComponent implements OnInit {
   ngOnInit(): void {
     this.fetchData();
   }
+
+  autosaveOn:boolean = false;
 
   SaveHash: string = '';
 
@@ -86,4 +89,14 @@ export class SettingsMenuComponent implements OnInit {
     this.acctServ.updateSaveFile(this.itmServ.itemsArray);
     this.fetchData();
   }
+
+  autosaveToggle(){
+    this.autosaveOn = !this.autosaveOn;
+  }
+
+  source = timer(0,1000);
+  subscribe = this.source.subscribe(val =>{
+    if(this.autosaveOn && val % 60 == 0)
+      this.updateAccount();
+  });
 }
