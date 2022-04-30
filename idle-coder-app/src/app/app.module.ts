@@ -24,6 +24,9 @@ import { AccountService } from './account.service';
 import { ItemsService } from './items.service'
 import { HighScoresComponent } from './high-scores/high-scores.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
+
+
 
 
 
@@ -50,6 +53,7 @@ import { MatDividerModule } from '@angular/material/divider';
     ScrollingModule,
     MatDividerModule,
     HttpClientModule,
+    MatTableModule
   ],
   providers: [AccountService, ItemsService, CookieService],
   bootstrap: [AppComponent]
