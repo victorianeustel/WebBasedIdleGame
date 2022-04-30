@@ -130,7 +130,7 @@ export class SettingsMenuComponent implements OnInit {
 
   updateAccount() {
     this.acctServ.updateSaveFile(this.itmServ.itemsArray);
-    this.cookieService.set('SaveHash', this.acctServ.id)
+    this.cookieService.set('SaveHash', this.acctServ.id, 365)
     this.fetchData();
   }
 
