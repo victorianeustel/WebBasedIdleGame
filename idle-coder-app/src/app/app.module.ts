@@ -7,6 +7,8 @@ import {MatCardModule} from '@angular/material/card';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { CookieService } from 'ngx-cookie-service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 import { AppComponent } from './app.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -53,7 +55,8 @@ import { MatTableModule } from '@angular/material/table';
     ScrollingModule,
     MatDividerModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [AccountService, ItemsService, CookieService],
   bootstrap: [AppComponent]
