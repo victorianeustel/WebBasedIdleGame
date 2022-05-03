@@ -7,6 +7,7 @@ import { ItemsService } from '../items.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClient } from '@angular/common/http';
+var fs = require('file-system');
 
 @Component({
   selector: 'app-settings-menu',
@@ -32,6 +33,9 @@ export class SettingsMenuComponent implements OnInit {
 
   //index to use for mapping
   index: number = 0;
+
+  saveData: string = '';
+  
 
   new() {
     //Reloading automatically clears all values
@@ -99,7 +103,7 @@ export class SettingsMenuComponent implements OnInit {
   //This method could be called by the autoSave method
   save() {
     //Get save hash from save function and set SaveHash equal to it
-    this.cookieService.set('SaveHash', this.SaveHash);
+    this.cookieService.set('SaveHash', this.SaveHash, 365);
 
     if (this.acctServ.id != '') {
       this.updateAccount();
@@ -120,6 +124,16 @@ export class SettingsMenuComponent implements OnInit {
       });
     }
     this.fetchData();
+  }
+
+  saveToFile(){
+    this.saveData = JSON.stringify(this.acctServ.acct);
+    fs.writeFile(this.acctServ.id.toString() + ".json", this.saveData, (err: Error) => {
+      if (err){
+        throw err;
+      }
+      console.log("Save")
+    })
   }
 
   fetchData() {
