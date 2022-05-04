@@ -18,7 +18,7 @@ import {MatSlideToggle} from '@angular/material/slide-toggle'
 })
 export class SettingsMenuComponent implements OnInit {
 
-  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private snackBar: MatSnackBar, private dialog: MatDialog) {}
+  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private snackBar: MatSnackBar, private dialog: MatDialog,) {}
   ngOnInit(): void {
     this.fetchData();
   }
@@ -133,7 +133,7 @@ export class SettingsMenuComponent implements OnInit {
 
   openLoadDialog(): void {
     const dialogRef = this.dialog.open(LoadDialogComponent, {
-      width: '350px',
+      width: '260px',
     });
 
     dialogRef.afterClosed().subscribe(gameID => {
