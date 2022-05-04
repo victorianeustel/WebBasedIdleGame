@@ -7,7 +7,6 @@ import { ItemsService } from '../items.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClient } from '@angular/common/http';
-var fs = require('file-system');
 
 @Component({
   selector: 'app-settings-menu',
@@ -128,12 +127,34 @@ export class SettingsMenuComponent implements OnInit {
 
   saveToFile(){
     this.saveData = JSON.stringify(this.acctServ.acct);
+    var element = document.createElement('a');
+    element.setAttribute('href','data:text/plain;charset=utf-8, ' + encodeURIComponent(this.saveData));
+    element.setAttribute('download', 'mycookiefile.txt');
+    document.body.appendChild(element);
+    element.click();
+    /*
     fs.writeFile(this.acctServ.id.toString() + ".json", this.saveData, (err: Error) => {
       if (err){
         throw err;
       }
       console.log("Save")
-    })
+    })*/
+  }
+
+  openFile(event: any){
+    var input = event.target;
+
+    if (input.files.length == 0) return;
+
+    var fileReader = new FileReader();
+
+    fileReader.onload = (e) => {
+      let inputText = e.target?.result;
+      // Do the rest of the processing
+    }
+
+    fileReader.readAsText(input.files[0]);
+
   }
 
   fetchData() {
