@@ -6,6 +6,7 @@ import { AccountService } from '../account.service';
 import { ItemsService } from '../items.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-settings-menu',
@@ -14,7 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 })
 export class SettingsMenuComponent implements OnInit {
 
-  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService) {}
+  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -51,6 +52,8 @@ export class SettingsMenuComponent implements OnInit {
       // Send SaveHash to appropriate load function
     }
     catch{Error}
+
+    this.openSnackBar("Game loaded!");
   }
 
   //This method could be called by the autoSave method
@@ -77,6 +80,7 @@ export class SettingsMenuComponent implements OnInit {
       });
     }
     this.fetchData();
+    this.openSnackBar("Account saved!    Your game ID is: " + this.acctServ.id)
   }
 
   fetchData() {
@@ -92,6 +96,13 @@ export class SettingsMenuComponent implements OnInit {
 
   autosaveToggle(){
     this.autosaveOn = !this.autosaveOn;
+    
+    if (this.autosaveOn == true) {
+      this.openSnackBar("Autosave turned on!")
+    }
+    else {
+      this.openSnackBar("Autosave turned off!")
+    }
   }
 
   source = timer(0,1000);
@@ -99,4 +110,8 @@ export class SettingsMenuComponent implements OnInit {
     if(this.autosaveOn && val % 60 == 0)
       this.updateAccount();
   });
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message);
+  }
 }
