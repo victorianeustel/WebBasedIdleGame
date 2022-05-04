@@ -26,12 +26,11 @@ mat-divider {
     padding-bottom: 10px;
 }
 
-.inventory-viewport {
-    height: 360px;
-    width: auto;
-    padding: 20px;
-}
-  
   .inventory-item {
     height: 140px;
   }
+
+  .card-container {
+    max-height: 360px;
+    overflow: auto;
+}

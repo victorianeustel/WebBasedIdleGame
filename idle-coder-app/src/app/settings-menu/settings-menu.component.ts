@@ -5,8 +5,10 @@ import { Account } from '../account';
 import { AccountService } from '../account.service';
 import { ItemsService } from '../items.service';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClient } from '@angular/common/http';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Variable } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-settings-menu',
@@ -15,7 +17,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SettingsMenuComponent implements OnInit {
 
-  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private http: HttpClient) { }
+
+  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private http: HttpClient, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -29,6 +32,9 @@ export class SettingsMenuComponent implements OnInit {
   accountList: Account[] = [];
 
   tempID: string = '';
+  saveData: string = '';
+
+  saveID: string = '';
 
   //index to use for mapping
   index: number = 0;
@@ -94,8 +100,14 @@ export class SettingsMenuComponent implements OnInit {
       //   this.acctServ.id = this.tempID;
       //  }
     }
-  }
+    catch{Error}
 
+    this.openSnackBar("Game loaded!");
+  }
+//load from file
+  loadFromFile(){
+
+  }
   //This method could be called by the autoSave method
   save() {
     //Get save hash from save function and set SaveHash equal to it
@@ -120,6 +132,17 @@ export class SettingsMenuComponent implements OnInit {
       });
     }
     this.fetchData();
+    this.openSnackBar("Account saved!    Your game ID is: " + this.acctServ.id)
+  }
+
+  saveToFile(){
+    this.saveID = this.acctServ.id + ".txt";
+    this.saveData = JSON.stringify(this.acctServ.acct) + JSON.stringify(this.itmServ.itemsArray);
+    var element = document.createElement('a');
+    element.setAttribute('href','data:text/plain;charset=utf-8, ' + encodeURIComponent(this.saveData));
+    element.setAttribute('download', this.saveID);
+    document.body.appendChild(element);
+    element.click();
   }
 
   fetchData() {
@@ -136,6 +159,13 @@ export class SettingsMenuComponent implements OnInit {
 
   autosaveToggle() {
     this.autosaveOn = !this.autosaveOn;
+    
+    if (this.autosaveOn == true) {
+      this.openSnackBar("Autosave turned on!")
+    }
+    else {
+      this.openSnackBar("Autosave turned off!")
+    }
   }
 
   source = timer(0, 1000);
@@ -143,4 +173,25 @@ export class SettingsMenuComponent implements OnInit {
     if (this.autosaveOn && val % 60 == 0)
       this.updateAccount();
   });
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message);
+  }
+
+  openFile(event: any){
+    var input = event.target;
+
+    if (input.files.length == 0) return;
+
+    var fileReader = new FileReader();
+
+    fileReader.onload = (e) => {
+      let inputText = e.target?.result;
+      // Do the rest of the processing
+      let accountJSON = JSON.parse(inputText!.toString());
+      console.log(accountJSON);
+    }
+
+    fileReader.readAsText(input.files[0]);
+  }
 }
