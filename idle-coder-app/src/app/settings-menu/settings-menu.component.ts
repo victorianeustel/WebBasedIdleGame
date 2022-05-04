@@ -100,13 +100,13 @@ export class SettingsMenuComponent implements OnInit {
       //   this.acctServ.id = this.tempID;
       //  }
     }
-    catch{Error}
+    //catch{Error}
 
     this.openSnackBar("Game loaded!");
   }
 //load from file
   loadFromFile(){
-
+    
   }
   //This method could be called by the autoSave method
   save() {
@@ -137,7 +137,16 @@ export class SettingsMenuComponent implements OnInit {
 
   saveToFile(){
     this.saveID = this.acctServ.id + ".txt";
-    this.saveData = JSON.stringify(this.acctServ.acct) + JSON.stringify(this.itmServ.itemsArray);
+    
+    const newAcct: Account = {
+      id: this.acctServ.createID(),
+      score: this.acctServ.score,
+      multiplier: this.acctServ.multiplier,
+      perMinute: this.acctServ.perMinute,
+      itemInventory: this.itmServ.itemsArray,
+    };
+
+    this.saveData = JSON.stringify(newAcct);
     var element = document.createElement('a');
     element.setAttribute('href','data:text/plain;charset=utf-8, ' + encodeURIComponent(this.saveData));
     element.setAttribute('download', this.saveID);
