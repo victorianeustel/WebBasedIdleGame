@@ -1,19 +1,17 @@
 <div class="container">
-<h1 mat-dialog-title>Load Game</h1>
-
-<div mat-dialog-content >
-    <div appearance="fill" >
-        <label for="text">Enter in GameID to Load:</label>
+    <h1 mat-dialog-title>Load Game</h1>
+    
+    <div mat-dialog-content >
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Enter GameID</mat-label>
+            <textarea matInput #gameID [(ngModel)]="data.gameID" ></textarea>
+        </mat-form-field>
     </div>
-    <div>
-        <input matInput #text placeholder="GameID">
+    
+    <div mat-dialog-actions>
+        <button mat-raised-button [mat-dialog-close]="data.gameID" color="primary" (click)="setGameID(gameID.value)">
+            Load Game
+        </button>
+      <button color="primary" mat-raised-button (click)="onNoClick()">Nevermind</button>
     </div>
-</div>
-
-<div mat-dialog-actions>
-    <button mat-raised-button [mat-dialog-close] color="primary">
-        Load Game
-    </button>
-  <button color="primary" mat-raised-button (click)="onNoClick()">Nevermind</button>
-</div>
-</div>
+    </div>

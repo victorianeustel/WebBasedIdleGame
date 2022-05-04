@@ -11,6 +11,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -60,6 +61,7 @@ import { LoadDialogComponent } from './load-dialog/load-dialog.component';
     MatDialogModule,
     MatSlideToggleModule,
     FormsModule,
+    MatInputModule
   ],
   providers: [AccountService, ItemsService, CookieService],
   bootstrap: [AppComponent]

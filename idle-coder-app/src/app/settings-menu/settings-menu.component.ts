@@ -8,6 +8,13 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { HttpClient } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoadDialogComponent } from '../load-dialog/load-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import {MatSlideToggle} from '@angular/material/slide-toggle'
+
+export interface DialogData {
+  gameID: string;
+}
 
 import { LoadDialogComponent } from '../load-dialog/load-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,9 +27,7 @@ import {MatSlideToggle} from '@angular/material/slide-toggle'
 })
 export class SettingsMenuComponent implements OnInit {
 
-
-  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private http: HttpClient, private snackBar: MatSnackBar, private dialog: MatDialog) {}
-
+  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private snackBar: MatSnackBar, private dialog: MatDialog,) {}
   ngOnInit(): void {
     this.fetchData();
   }
@@ -31,6 +36,8 @@ export class SettingsMenuComponent implements OnInit {
 
 
   SaveHash: string = '';
+
+  gameID: string = '';
 
   accountList: Account[] = [];
 
@@ -42,9 +49,21 @@ export class SettingsMenuComponent implements OnInit {
   //index to use for mapping
   index: number = 0;
 
-  new() {
-    //Reloading automatically clears all values
-    window.location.reload();
+  new(){
+    this.acctServ.id = this.acctServ.createID();
+    this.acctServ.score = 0;
+    this.acctServ.multiplier = 1;
+    this.acctServ.perMinute = 0;
+    this.itmServ.itemsArray = [
+      {name:"Typing Lessons", desc:"Clicks are worth 1 more!", price:50, isIncrementModifier:true, increaseToStat:1, numPurchased:0, purchaseLimit:50},
+      {name:"Mouse on a Wheel", desc:"+60 Score per Minute!", price: 50, isIncrementModifier:false, increaseToStat:60, numPurchased:0, purchaseLimit:50},
+      {name:"New Keyboard", desc:"Clicks are worth 5 more!", price:150, isIncrementModifier:true, increaseToStat:5, numPurchased:0, purchaseLimit:50},
+      {name:"Hamsters on Wheels", desc:"+300 Score per Minute!", price: 200, isIncrementModifier:false, increaseToStat:300, numPurchased:0, purchaseLimit:50},
+      {name:"New Computer", desc:"Clicks are worth 200 more!", price:5000, isIncrementModifier:true, increaseToStat:200, numPurchased:0, purchaseLimit:50},
+      {name:"Hire a Developer", desc:"+5000 Score per Minute!", price: 7500, isIncrementModifier:false, increaseToStat:1000, numPurchased:0, purchaseLimit:50},
+      {name:"Coffee", desc:"Clicks are worth 500 more!", price:10000, isIncrementModifier:true, increaseToStat:500, numPurchased:0, purchaseLimit:50},
+    ];
+    this.openSnackBar("New account created!");
   }
 
   load(username: string) {
@@ -188,6 +207,22 @@ export class SettingsMenuComponent implements OnInit {
 
   openSnackBar(message: string) {
     this.snackBar.open(message);
+
+  }
+
+  openLoadDialog(): void {
+    const dialogRef = this.dialog.open(LoadDialogComponent, {
+      width: '260px',
+      data: {gameID: this.gameID,},
+    });
+
+    dialogRef.afterClosed().subscribe(gameID => {
+      console.log('The dialog was closed');
+      this.gameID = gameID;
+      this.load(gameID);
+    });
+
+
   }
 
   openLoadDialog(): void {

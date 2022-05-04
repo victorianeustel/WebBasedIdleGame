@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AccountService } from '../account.service';
+import { MatInput } from '@angular/material/input';
+import { DialogData } from '../settings-menu/settings-menu.component';
 
 @Component({
   selector: 'app-load-dialog',
@@ -12,12 +15,15 @@ export class LoadDialogComponent  {
   constructor(
     public dialogRef: MatDialogRef<LoadDialogComponent>,
     private acctServ: AccountService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     ) { }
 
-  gameID: String = '';
+  gameID: string = '';
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-// create fnction to read from file and return string id
-}
+
+  setGameID(inputGameID: string){
+    this.gameID = inputGameID;
+  }
