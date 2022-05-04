@@ -8,7 +8,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { CookieService } from 'ngx-cookie-service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -27,10 +29,7 @@ import { ItemsService } from './items.service'
 import { HighScoresComponent } from './high-scores/high-scores.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
-
-
-
-
+import { LoadDialogComponent } from './load-dialog/load-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +44,7 @@ import { MatTableModule } from '@angular/material/table';
     StoreComponent,
     InventoryComponent,
     HighScoresComponent,
+    LoadDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +56,10 @@ import { MatTableModule } from '@angular/material/table';
     MatDividerModule,
     HttpClientModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    FormsModule,
   ],
   providers: [AccountService, ItemsService, CookieService],
   bootstrap: [AppComponent]

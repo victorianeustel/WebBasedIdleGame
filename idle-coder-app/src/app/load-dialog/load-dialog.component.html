@@ -1,0 +1,19 @@
+<div class="container">
+<h1 mat-dialog-title>Load Game</h1>
+
+<div mat-dialog-content >
+    <div appearance="fill" >
+        <label for="text">Enter in GameID to Load:</label>
+    </div>
+    <div>
+        <input matInput #text placeholder="GameID">
+    </div>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close] color="primary">
+        Load Game
+    </button>
+  <button color="primary" mat-raised-button (click)="onNoClick()">Nevermind</button>
+</div>
+</div>

@@ -8,7 +8,10 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { HttpClient } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
+
+import { LoadDialogComponent } from '../load-dialog/load-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import {MatSlideToggle} from '@angular/material/slide-toggle'
 
 @Component({
   selector: 'app-settings-menu',
@@ -18,7 +21,7 @@ import { Variable } from '@angular/compiler/src/render3/r3_ast';
 export class SettingsMenuComponent implements OnInit {
 
 
-  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private http: HttpClient, private snackBar: MatSnackBar, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -187,20 +190,13 @@ export class SettingsMenuComponent implements OnInit {
     this.snackBar.open(message);
   }
 
-  openFile(event: any){
-    var input = event.target;
-
-    if (input.files.length == 0) return;
-
-    var fileReader = new FileReader();
-
-    fileReader.onload = (e) => {
-      let inputText = e.target?.result;
-      // Do the rest of the processing
-      let accountJSON = JSON.parse(inputText!.toString());
-      console.log(accountJSON);
-    }
-
-    fileReader.readAsText(input.files[0]);
+  openLoadDialog(): void {
+    const dialogRef = this.dialog.open(LoadDialogComponent, {
+      width: '350px',
+    });
+    
+    dialogRef.afterClosed().subscribe(gameID => {
+      console.log('The dialog was closed');
+    });
   }
 }

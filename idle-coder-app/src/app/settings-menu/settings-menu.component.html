@@ -1,19 +1,16 @@
 <mat-card class="container">
     <h2>Account Settings</h2>
-    <h3>Save ID: {{this.acctServ.id}}</h3>
     <mat-card-content>
         <button mat-raised-button color="accent" (click)="new()">New Game</button>
     </mat-card-content>
     <mat-card-content>
-        <input type="id" #id> <p>Leave blank to load from cookies, or enter Save ID to load from database</p>
-        <button mat-raised-button color="accent" (click)="load(id.value)">Load Game</button><input type="file" onchange="openFile(event)">
+        <button mat-raised-button color="accent" (click)="openLoadDialog()">Load Game</button>
     </mat-card-content>
     <mat-card-content>
         <button mat-raised-button color="accent" (click)="save()">Save Game</button>
         <button mat-raised-button color="accent" (click)="saveToFile()">Save To File</button>
     </mat-card-content>
     <mat-card-content>
-        <input type="checkbox" id="autosave" (click)="autosaveToggle()">
-        <label for="autosave">Toggle autosave every 60 seconds</label>
+        <mat-slide-toggle  color = "primary" (click)="autosaveToggle()"> Autosave </mat-slide-toggle>
     </mat-card-content>
 </mat-card>
