@@ -11,6 +11,10 @@ import { LoadDialogComponent } from '../load-dialog/load-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import {MatSlideToggle} from '@angular/material/slide-toggle'
 
+export interface DialogData {
+  gameID: string;
+}
+
 @Component({
   selector: 'app-settings-menu',
   templateUrl: './settings-menu.component.html',
@@ -26,6 +30,8 @@ export class SettingsMenuComponent implements OnInit {
   autosaveOn:boolean = false;
 
   SaveHash: string = '';
+
+  gameID: string = '';
 
   accountList: Account[] = [];
 
@@ -134,10 +140,15 @@ export class SettingsMenuComponent implements OnInit {
   openLoadDialog(): void {
     const dialogRef = this.dialog.open(LoadDialogComponent, {
       width: '260px',
+      data: {gameID: this.gameID,},
     });
 
     dialogRef.afterClosed().subscribe(gameID => {
       console.log('The dialog was closed');
+      this.gameID = gameID;
+      this.load(gameID);
     });
+
+
   }
 }
