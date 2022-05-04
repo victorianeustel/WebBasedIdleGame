@@ -38,7 +38,6 @@ export class ItemsService {
         /*START: POTENTIAL INCLUSION --- SCALING COSTS ---
         
         this.itemsArray[index].price += Math.round(this.itemsArray[index].price * this.itemsArray[index].numPurchased * .01); 
-
         END: --- SCALING COSTS ---*/
 
         //if item increases the button multiplier, add increase to current multiplier

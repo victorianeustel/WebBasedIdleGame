@@ -10,6 +10,7 @@ import { ItemsService } from '../items.service';
 export class InventoryComponent implements OnInit {
 
   items: item[] = [];
+  
   constructor(private itemService: ItemsService) {}
 
   ngOnInit(): void {

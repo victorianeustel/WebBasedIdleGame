@@ -27,3 +27,4 @@ export class LoadDialogComponent  {
   setGameID(inputGameID: string){
     this.gameID = inputGameID;
   }
+}
