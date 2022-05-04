@@ -6,10 +6,10 @@
     </mat-card-content>
     <mat-card-content>
         <input type="id" #id>
-        <button mat-raised-button color="accent" (click)="load(id.value)">Load Game</button>
+        <button mat-raised-button color="accent" (click)="load(id.value)">Load Game</button><input type="file" onchange="openFile(event)">
     </mat-card-content>
     <mat-card-content>
-        <button mat-raised-button color="accent" (click)="save()">Save Game</button>
+        <button mat-raised-button color="accent" (click)="save()">Save Game</button><button mat-raised-button color="accent" (click)="saveToFile()">Save To File</button>
     </mat-card-content>
     <mat-card-content>
         <input type="checkbox" id="autosave" (click)="autosaveToggle()">

@@ -7,6 +7,7 @@ import { ItemsService } from '../items.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Variable } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-settings-menu',
@@ -26,6 +27,10 @@ export class SettingsMenuComponent implements OnInit {
   SaveHash: string = '';
 
   accountList: Account[] = [];
+
+  saveData: string = '';
+
+  saveID: string = '';
 
   //index to use for mapping
   index: number = 0;
@@ -55,7 +60,10 @@ export class SettingsMenuComponent implements OnInit {
 
     this.openSnackBar("Game loaded!");
   }
+//load from file
+  loadFromFile(){
 
+  }
   //This method could be called by the autoSave method
   save(){
     //Get save hash from save function and set SaveHash equal to it
@@ -81,6 +89,16 @@ export class SettingsMenuComponent implements OnInit {
     }
     this.fetchData();
     this.openSnackBar("Account saved!    Your game ID is: " + this.acctServ.id)
+  }
+
+  saveToFile(){
+    this.saveID = this.acctServ.id + ".txt";
+    this.saveData = JSON.stringify(this.acctServ.acct) + JSON.stringify(this.itmServ.itemsArray);
+    var element = document.createElement('a');
+    element.setAttribute('href','data:text/plain;charset=utf-8, ' + encodeURIComponent(this.saveData));
+    element.setAttribute('download', this.saveID);
+    document.body.appendChild(element);
+    element.click();
   }
 
   fetchData() {
@@ -113,5 +131,22 @@ export class SettingsMenuComponent implements OnInit {
 
   openSnackBar(message: string) {
     this.snackBar.open(message);
+  }
+
+  openFile(event: any){
+    var input = event.target;
+
+    if (input.files.length == 0) return;
+
+    var fileReader = new FileReader();
+
+    fileReader.onload = (e) => {
+      let inputText = e.target?.result;
+      // Do the rest of the processing
+      let accountJSON = JSON.parse(inputText!.toString());
+      console.log(accountJSON);
+    }
+
+    fileReader.readAsText(input.files[0]);
   }
 }
