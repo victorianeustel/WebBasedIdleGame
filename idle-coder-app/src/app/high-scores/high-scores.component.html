@@ -1,7 +1,10 @@
 
-<input type="text" #name placeholder="Name">    
-<button (click)="addHighScore(name.value)">Add High Score</button> 
-<br/><br/>
+
+<mat-form-field>
+    <input matInput type="text" #name placeholder="enter name">   
+</mat-form-field>
+
+<button mat-raised-button color="accent"(click)="addHighScore(name.value)">Add High Score</button> 
 
 <div class="table-container">
     <table mat-table [dataSource]="scores" matSort>

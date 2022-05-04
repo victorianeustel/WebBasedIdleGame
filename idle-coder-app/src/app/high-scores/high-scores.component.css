@@ -6,3 +6,7 @@ table {
     height: 400px;
     overflow: auto;
 }
+
+.nameInput{
+    height: 75%;
+}

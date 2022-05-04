@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../account.service';
 import { highScore } from '../highScore';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatInput } from '@angular/material/input';
+
 
 @Component({
   selector: 'app-high-scores',
