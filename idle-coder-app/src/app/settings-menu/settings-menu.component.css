@@ -1,8 +1,16 @@
+h2{
+    text-align: center;
+}
+
+mat-slide-toggle{
+    font-size: small;
+}
+
 button{
-    width: 200px;
+    width: 19rem;
     height: fit-content; 
     font-size: large;
-    background-color: rgb(17, 68, 74) !important;
+    background-color: rgb(37, 97, 104) !important;
     text-align: center;
     font-weight: bold;
     font-style: italic;
