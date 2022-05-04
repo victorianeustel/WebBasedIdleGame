@@ -5,7 +5,8 @@ import { Account } from '../account';
 import { AccountService } from '../account.service';
 import { ItemsService } from '../items.service';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { MatCheckboxModule } from '@angular/material/checkbox'
+import { HttpClient } from '@angular/common/http';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 
@@ -16,18 +17,21 @@ import { Variable } from '@angular/compiler/src/render3/r3_ast';
 })
 export class SettingsMenuComponent implements OnInit {
 
-  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private snackBar: MatSnackBar) {}
+
+  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private http: HttpClient, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.fetchData();
   }
 
-  autosaveOn:boolean = false;
+  autosaveOn: boolean = false;
+
 
   SaveHash: string = '';
 
   accountList: Account[] = [];
 
+  tempID: string = '';
   saveData: string = '';
 
   saveID: string = '';
@@ -35,26 +39,66 @@ export class SettingsMenuComponent implements OnInit {
   //index to use for mapping
   index: number = 0;
 
-  new(){
-    // this.cookieService.set('SaveHash','');
+  new() {
+    //Reloading automatically clears all values
+    window.location.reload();
   }
 
-  load(username: string){
-    this.fetchData();
+  load(username: string) {
+    this.tempID = this.acctServ.id;
+    if (username != '' && username != null) {
+      try {
+        this.fetchData();
+        console.log("Loaded from text field")
+        //map finding account in array that matches user's id
+        this.index = this.accountList.map(account => account.id).indexOf(username);
 
-    //map finding account in array that matches user's id
-    this.index = this.accountList.map(account => account.id).indexOf(username);
+        //set current settings to account loaded settings
+        this.acctServ.id = this.acctServ.idList[this.index];
+        this.acctServ.score = this.accountList[this.index].score;
+        this.acctServ.multiplier = this.accountList[this.index].multiplier;
+        this.acctServ.perMinute = this.accountList[this.index].perMinute;
+        this.itmServ.itemsArray = this.accountList[this.index].itemInventory;
+      }
+      catch {
+        console.log("Tried to load an invalid savehash from text field.")
+        this.acctServ.id = this.tempID;
+      }
+    }
+    else {
+      // try {
+      this.SaveHash = this.cookieService.get('SaveHash');
+      if (this.SaveHash != '') {
 
-    //set current settings to account loaded settings
-    this.acctServ.id = this.acctServ.idList[this.index];
-    this.acctServ.score = this.accountList[this.index].score;
-    this.acctServ.multiplier = this.accountList[this.index].multiplier;
-    this.acctServ.perMinute = this.accountList[this.index].perMinute;
-    this.itmServ.itemsArray = this.accountList[this.index].itemInventory;
+        //maybe this should be moved to account.service?
+        this.http.patch("https://idle-coder-app-default-rtdb.firebaseio.com/accounts/" + this.SaveHash + ".json",
+          {
+            "id": this.SaveHash,
+            "itemInventory": this.itmServ.itemsArray,
+            "multiplier": this.acctServ.multiplier,
+            "perMinute": this.acctServ.perMinute,
+            "score": this.acctServ.score,
+          })
 
-    try{
-      // this.SaveHash = this.cookieService.get('SaveHash');           
-      // Send SaveHash to appropriate load function
+        this.index = this.accountList.map(account => account.id).indexOf(this.SaveHash);
+        console.log("SaveHash loaded from cookie");
+        console.log(this.SaveHash);
+        //set current settings to account loaded settings
+        this.acctServ.id = this.acctServ.idList[this.index];
+        this.acctServ.score = this.accountList[this.index].score;
+        this.acctServ.multiplier = this.accountList[this.index].multiplier;
+        this.acctServ.perMinute = this.accountList[this.index].perMinute;
+        this.itmServ.itemsArray = this.accountList[this.index].itemInventory;
+      }
+      else {
+        console.log("No cookie found.")
+        this.acctServ.id = this.tempID;
+      }
+      // }
+      // catch { 
+      //   console.log("Tried to load an invalid savehash from cookie.")
+      //   this.acctServ.id = this.tempID;
+      //  }
     }
     catch{Error}
 
@@ -65,24 +109,24 @@ export class SettingsMenuComponent implements OnInit {
 
   }
   //This method could be called by the autoSave method
-  save(){
+  save() {
     //Get save hash from save function and set SaveHash equal to it
-    // this.cookieService.set('SaveHash', this.SaveHash);
+    this.cookieService.set('SaveHash', this.SaveHash);
 
-    if(this.acctServ.id !=  '') {
+    if (this.acctServ.id != '') {
       this.updateAccount();
     }
-    else{
+    else {
       const newAcct: Account = {
         id: this.acctServ.createID(),
-        score: this.acctServ.score,    
+        score: this.acctServ.score,
         multiplier: this.acctServ.multiplier,
-        perMinute: this.acctServ.perMinute,    
+        perMinute: this.acctServ.perMinute,
         itemInventory: this.itmServ.itemsArray,
       };
 
       this.acctServ.id = newAcct.id;
-    
+
       this.acctServ.addAccount(newAcct).subscribe((data) => {
         console.log(data);
       });
@@ -107,12 +151,13 @@ export class SettingsMenuComponent implements OnInit {
     });
   }
 
-  updateAccount(){
+  updateAccount() {
     this.acctServ.updateSaveFile(this.itmServ.itemsArray);
+    this.cookieService.set('SaveHash', this.acctServ.id, 365)
     this.fetchData();
   }
 
-  autosaveToggle(){
+  autosaveToggle() {
     this.autosaveOn = !this.autosaveOn;
     
     if (this.autosaveOn == true) {
@@ -123,9 +168,9 @@ export class SettingsMenuComponent implements OnInit {
     }
   }
 
-  source = timer(0,1000);
-  subscribe = this.source.subscribe(val =>{
-    if(this.autosaveOn && val % 60 == 0)
+  source = timer(0, 1000);
+  subscribe = this.source.subscribe(val => {
+    if (this.autosaveOn && val % 60 == 0)
       this.updateAccount();
   });
 
