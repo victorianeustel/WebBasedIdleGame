@@ -85,7 +85,6 @@ export class SettingsMenuComponent implements OnInit {
 
     if(this.acctServ.id !=  '') {
       this.updateAccount();
-      this.copyToClickBoard();
     }
     else{
       const newAcct: Account = {
@@ -97,13 +96,12 @@ export class SettingsMenuComponent implements OnInit {
       };
 
       this.acctServ.id = newAcct.id;
-      this.copyToClickBoard();
     
       this.acctServ.addAccount(newAcct).subscribe((data) => {
         console.log(data);
       });
     }
-
+    this.copyToClickBoard();
 
     this.fetchData();
     this.openSnackBar("Account saved! Please copy your ID to load later: " + this.acctServ.id, "close")
@@ -159,14 +157,8 @@ export class SettingsMenuComponent implements OnInit {
   }
 
   copyToClickBoard(){
+    navigator.clipboard.writeText(this.acctServ.id).then().catch(e => console.error(e));
 
-    navigator.clipboard.writeText(this.acctServ.id)
-        .then(() => {
-        console.log("Game ID saved to clipboard -- ID: " + this.acctServ.id)
-    })
-        .catch(err => {
-        console.log('Something went wrong', err);
-    })
- 
+    console.log("Game ID saved to clipboard -- ID: " + this.acctServ.id)
   } 
 }

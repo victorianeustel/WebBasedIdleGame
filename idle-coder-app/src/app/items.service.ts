@@ -33,7 +33,7 @@ export class ItemsService {
         //take the points away from the user according to the cost
         this.acctSer.score -= this.itemsArray[index].price;
 
-        this.openSnackBar(this.itemsArray[index].name + " has been added to inventory!")
+        this.openSnackBar(this.itemsArray[index].name + " has been added to inventory!", "close");
 
         /*START: POTENTIAL INCLUSION --- SCALING COSTS ---
         
@@ -52,7 +52,9 @@ export class ItemsService {
       }
     }
 
-    openSnackBar(message: string) {
-      this.snackBar.open(message);
-    }
+    openSnackBar(message: string, action: string) {
+      this.snackBar.open(message, action, {
+         duration: 3500,
+      });
+   } 
 }
