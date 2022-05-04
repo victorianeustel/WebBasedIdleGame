@@ -20,7 +20,7 @@
         <!-- Name Column -->
         <ng-container matColumnDef="score">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
-            <td mat-cell *matCellDef="let row"> {{row.score}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.score.toLocaleString()}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>

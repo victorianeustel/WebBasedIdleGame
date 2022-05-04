@@ -1,6 +1,6 @@
 <mat-card class="container">
-    <h3 id="score-title">Available Points: {{acctServ.score}}</h3>
-    <h4>Current Worth of Clicks: {{acctServ.multiplier}}<br>Current Score per Minute: {{acctServ.perMinute}}</h4>
+    <h3 id="score-title">Available Points: {{acctServ.score.toLocaleString()}}</h3>
+    <h4>Current Worth of Clicks: {{acctServ.multiplier.toLocaleString()}}<br>Current Score per Minute: {{acctServ.perMinute.toLocaleString()}}</h4>
     <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="store-viewport">
         <h5>Scroll to see more items.</h5>
         <div *cdkVirtualFor="let item of items; let i = index" class="store-item">
@@ -8,7 +8,7 @@
                 <mat-card-title>{{item.name}}</mat-card-title>
                 <mat-card-subtitle>{{item.desc}}</mat-card-subtitle>
                 <mat-card-content>Price: {{item.price}} points</mat-card-content>
-                <button class = "buybutton" mat-raised-button color="accent" (click)="itmServ.purchase(i)" [disabled]="item.price > acctServ.score || item.numPurchased>item.purchaseLimit" >
+                <button class = "buybutton" mat-raised-button color="accent" (click)="itmServ.purchase(i)" [disabled]="item.price > acctServ.score || item.numPurchased>=item.purchaseLimit" >
                     Buy Item
                 </button>
             </mat-card>        
