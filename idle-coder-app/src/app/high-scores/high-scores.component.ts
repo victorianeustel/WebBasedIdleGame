@@ -29,7 +29,7 @@ export class HighScoresComponent implements OnInit {
     this.acctServ.addHighScore(this.scoreRecord).subscribe((data) => {
       this.fetchData();
     });
-    this.openSnackBar("High score added!")
+    this.openSnackBar("High score added!", "close")
 
   }
 
@@ -41,7 +41,9 @@ export class HighScoresComponent implements OnInit {
     });
   }
 
-    openSnackBar(message: string) {
-    this._snackBar.open(message);
-  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+       duration: 3500,
+    });
+ } 
 }

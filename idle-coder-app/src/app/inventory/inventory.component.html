@@ -7,11 +7,14 @@
     </div>
     <mat-card-content>
         <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="inventory-viewport">
-        <!-- <div *ngFor="let item of items; let i = index">
-            <div class="card" *ngIf="items[i].numPurchased>0"> -->
-            <div *cdkVirtualFor="let item of items; let i = index;" class="inventory-item">
-                <app-item [index]="i"></app-item>
+            <div ng-model="message">Upgrades will show here when bought from the store!</div>
+                <div ng-show="message" *cdkVirtualFor="let item of items; let i = index;" class="inventory-item">
+
+                <div class="card" *ngIf="items[i].numPurchased>0"> 
+                    <app-item></app-item>
+                </div>
             </div>
+
         <!-- </div> -->
         </cdk-virtual-scroll-viewport>
         <!-- </div> -->

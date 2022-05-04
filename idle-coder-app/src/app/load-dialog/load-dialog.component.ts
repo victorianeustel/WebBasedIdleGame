@@ -26,5 +26,4 @@ export class LoadDialogComponent  {
   setGameID(inputGameID: string){
     this.gameID = inputGameID;
   }
-// create fnction to read from file and return string id
 }

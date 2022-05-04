@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadDialogComponent } from '../load-dialog/load-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import {MatSlideToggle} from '@angular/material/slide-toggle'
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 export interface DialogData {
   gameID: string;
@@ -52,7 +53,7 @@ export class SettingsMenuComponent implements OnInit {
       {name:"Hire a Developer", desc:"+5000 Score per Minute!", price: 7500, isIncrementModifier:false, increaseToStat:1000, numPurchased:0, purchaseLimit:50},
       {name:"Coffee", desc:"Clicks are worth 500 more!", price:10000, isIncrementModifier:true, increaseToStat:500, numPurchased:0, purchaseLimit:50},
     ];
-    this.openSnackBar("New account created!");
+    this.openSnackBar("New account created!", "close");
   }
 
   load(username: string){
@@ -74,7 +75,7 @@ export class SettingsMenuComponent implements OnInit {
     }
     catch{Error}
 
-    this.openSnackBar("Game loaded!");
+    this.openSnackBar("Game loaded!", "close");
   }
 
   //This method could be called by the autoSave method
@@ -84,6 +85,7 @@ export class SettingsMenuComponent implements OnInit {
 
     if(this.acctServ.id !=  '') {
       this.updateAccount();
+      this.copyToClickBoard();
     }
     else{
       const newAcct: Account = {
@@ -95,13 +97,16 @@ export class SettingsMenuComponent implements OnInit {
       };
 
       this.acctServ.id = newAcct.id;
+      this.copyToClickBoard();
     
       this.acctServ.addAccount(newAcct).subscribe((data) => {
         console.log(data);
       });
     }
+
+
     this.fetchData();
-    this.openSnackBar("Account saved!    Your game ID is: " + this.acctServ.id)
+    this.openSnackBar("Account saved! Please copy your ID to load later: " + this.acctServ.id, "close")
   }
 
   fetchData() {
@@ -119,10 +124,10 @@ export class SettingsMenuComponent implements OnInit {
     this.autosaveOn = !this.autosaveOn;
     
     if (this.autosaveOn == true) {
-      this.openSnackBar("Autosave turned on!")
+      this.openSnackBar("Autosave turned on!", "close")
     }
     else {
-      this.openSnackBar("Autosave turned off!")
+      this.openSnackBar("Autosave turned off!", "close")
     }
   }
 
@@ -132,10 +137,11 @@ export class SettingsMenuComponent implements OnInit {
       this.updateAccount();
   });
 
-  openSnackBar(message: string) {
-    this.snackBar.open(message);
-
-  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+       duration: 3500,
+    });
+ } 
 
   openLoadDialog(): void {
     const dialogRef = this.dialog.open(LoadDialogComponent, {
@@ -151,4 +157,16 @@ export class SettingsMenuComponent implements OnInit {
 
 
   }
+
+  copyToClickBoard(){
+
+    navigator.clipboard.writeText(this.acctServ.id)
+        .then(() => {
+        console.log("Game ID saved to clipboard -- ID: " + this.acctServ.id)
+    })
+        .catch(err => {
+        console.log('Something went wrong', err);
+    })
+ 
+  } 
 }
