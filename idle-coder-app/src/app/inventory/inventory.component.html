@@ -1,22 +1,22 @@
 <mat-card class="container">
-    <mat-card-title-group>
+    <div>
       <mat-card-title>Inventory Items</mat-card-title>
-    </mat-card-title-group>
+    </div>
+    <mat-card-subtitle>
+            <div style="text-align: center;">
+                Upgrades purchased will show here when purchased from the store!
+            </div>
+    </mat-card-subtitle>
     <div class="divider">
         <mat-divider [inset]="true"></mat-divider>
     </div>
     <mat-card-content>
         <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="inventory-viewport">
-            <div ng-model="message">Upgrades will show here when bought from the store!</div>
-                <div ng-show="message" *cdkVirtualFor="let item of items; let i = index;" class="inventory-item">
-
+                <div *cdkVirtualFor="let item of items; let i = index;" class="inventory-item">
                 <div class="card" *ngIf="items[i].numPurchased>0"> 
                     <app-item></app-item>
                 </div>
             </div>
-
-        <!-- </div> -->
         </cdk-virtual-scroll-viewport>
-        <!-- </div> -->
     </mat-card-content>
 </mat-card>

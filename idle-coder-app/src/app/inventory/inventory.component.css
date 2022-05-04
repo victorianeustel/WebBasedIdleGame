@@ -2,6 +2,15 @@
     padding: 6px;
 }
 
+mat-card-title, mat-card-title-group{
+    text-align: center;
+}
+
+mat-card-content{
+    background-color: rgb(181, 226, 229);
+    border-radius: 10px;
+}
+
 .container{
     background-color: rgb(152, 208, 212);
     background-blend-mode: lighten;
