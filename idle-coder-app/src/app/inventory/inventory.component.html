@@ -12,9 +12,9 @@
     </div>
     <mat-card-content>
         <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="inventory-viewport">
-                <div *cdkVirtualFor="let item of items; let i = index;" class="inventory-item">
+                <div *cdkVirtualFor="let item of this.itmServ.itemsArray; let i = index;" class="inventory-item">
                 <div class="card"> 
-                    <app-item></app-item>
+                    <app-item [index]="i"></app-item>
                 </div>
             </div>
         </cdk-virtual-scroll-viewport>

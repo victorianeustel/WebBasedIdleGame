@@ -8,7 +8,7 @@
                 <mat-card-title>{{item.name}}</mat-card-title>
                 <mat-card-subtitle>{{item.desc}}</mat-card-subtitle>
                 <mat-card-content>Price: {{item.price}} points</mat-card-content>
-                <button class = "buybutton" mat-raised-button color="accent" (click)="itmServ.purchase(i)" [disabled]="item.price > acctServ.score || item.numPurchased>=item.purchaseLimit" >
+                <button class = "buybutton" mat-raised-button color="accent" (click)="itmServ.purchase(i)"  >
                     Buy Item
                 </button>
             </mat-card>        
