@@ -5,7 +5,12 @@
 
 .right-side-menu{
     flex-grow: 2; 
+    margin-top: 5px;
     max-width: 25%;
+    padding-left: 10px;
+    background-color: rgb(173, 215, 218);
+    border-radius: 5px;
+
 }
 
 .left-side-menu {
