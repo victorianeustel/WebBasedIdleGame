@@ -7,6 +7,9 @@ import { ItemsService } from '../items.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoadDialogComponent } from '../load-dialog/load-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import {MatSlideToggle} from '@angular/material/slide-toggle'
 
 @Component({
   selector: 'app-settings-menu',
@@ -15,8 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SettingsMenuComponent implements OnInit {
 
-  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private snackBar: MatSnackBar) {}
-
+  constructor(private cookieService: CookieService, public acctServ: AccountService, private itmServ: ItemsService, private snackBar: MatSnackBar, private dialog: MatDialog) {}
   ngOnInit(): void {
     this.fetchData();
   }
@@ -113,5 +115,16 @@ export class SettingsMenuComponent implements OnInit {
 
   openSnackBar(message: string) {
     this.snackBar.open(message);
+
+  }
+
+  openLoadDialog(): void {
+    const dialogRef = this.dialog.open(LoadDialogComponent, {
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe(gameID => {
+      console.log('The dialog was closed');
+    });
   }
 }
